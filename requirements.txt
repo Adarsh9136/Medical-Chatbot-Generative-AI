@@ -8,4 +8,6 @@ langchain-pinecone==0.2.8
 langchain-community==0.3.26
 langchain-openai==0.3.24
 langchain_experimental
+langchain-google-genai
+
 -e .
