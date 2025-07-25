@@ -31,7 +31,10 @@ docsearch = PineconeVectorStore.from_existing_index(
 
 retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":3})
 
-chatModel = ChatOpenAI(model="gpt-4o")
+chatModel = ChatOpenAI( model="gpt-3.5-turbo",
+    temperature=0.7,
+    openai_api_key=os.getenv("OPENAI_API_KEY"))
+
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system_prompt),
@@ -56,8 +59,6 @@ def chat():
     response = rag_chain.invoke({"input": msg})
     print("Response : ", response["answer"])
     return str(response["answer"])
-
-
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port= 8080, debug= True)
